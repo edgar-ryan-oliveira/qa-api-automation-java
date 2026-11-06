@@ -14,13 +14,15 @@ public class ProductsTest extends BaseTest {
             .statusCode(200).body("id",equalTo(1)).body("title",not(emptyOrNullString()));
     }
     @Test void shouldCreateProduct() {
-        String body = "{
-"title":"Mouse Gamer",
-"price":199.90,
-"description":"Mouse RGB",
-"image":"https://example.com/mouse.png",
-"category":"electronics"
-}";
+        String body = """
+{
+    "title": "Mouse Gamer",
+    "price": 199.90,
+    "description": "Mouse RGB",
+    "image": "https://example.com/mouse.png",
+    "category": "electronics"
+}
+""";
         given().contentType("application/json").body(body).when().post(Endpoints.PRODUCTS).then()
             .statusCode(anyOf(equalTo(200),equalTo(201))).body("title",equalTo("Mouse Gamer"));
     }
